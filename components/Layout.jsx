@@ -3,8 +3,10 @@ import Container from "./Header/Container";
 import Sidebar from "./Header/Sidebar";
 import Topbar from "./Header/Topbar";
 import Signin from "./Signin/Signin";
+import { useSession } from "next-auth/react";
 
 export default function Layout({ children }) {
+  const { status } = useSession();
   return (
     <>
       <Head>
@@ -21,18 +23,32 @@ export default function Layout({ children }) {
         <title>Dashboard</title>
       </Head>
       {/* <!-- Preloader --> */}
+      {status == "loading" && (
+        <>
+          <div className="preloader">
+            <div className="spinner-dots">
+              <span className="dot1"></span>
+              <span className="dot2"></span>
+              <span className="dot3"></span>
+            </div>
+          </div>
+        </>
+      )}
 
-      {/* <!-- Sidebar --> */}
+      {status == "authenticated" && (
+        <>
+          <Sidebar />
+          {/* <!-- END Sidebar --> */}
 
-      <Sidebar />
-      {/* <!-- END Sidebar --> */}
-
-      {/* <!-- Topbar --> */}
-      <Topbar />
-      {/* <!-- END Topbar --> */}
-      {/* <!-- Main container --> */}
-      <Signin />
-      {/* <!--/.main-content --> */}
+          {/* <!-- Topbar --> */}
+          <Topbar />
+          {/* <!-- END Topbar --> */}
+          {/* <!-- Main container --> */}
+          <Container>{children}</Container>
+          {/* <!--/.main-content --> */}
+        </>
+      )}
+      {status == "unauthenticated" && <Signin />}
 
       {/* <!-- Scripts --> */}
       <script src="/assets/js/core.min.js"></script>
