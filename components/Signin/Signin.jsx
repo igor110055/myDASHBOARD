@@ -1,6 +1,7 @@
 import Container from "../Header/Container";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Signin() {
   const [email, setEmail] = useState();
@@ -8,7 +9,10 @@ export default function Signin() {
 
   const submit = (e) => {
     e.preventDefault();
-    signIn("credentials", { email:"administrateur@domaine.com", password:"adm1n1str@t3ur" });
+    signIn("credentials", {
+      email: "administrateur@domaine.com",
+      password: "adm1n1str@t3ur",
+    });
   };
 
   return (
@@ -29,7 +33,7 @@ export default function Signin() {
                   className="form-control"
                   id="email"
                   name="email"
-                  onChange={(e)=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <label htmlFor="email">Email</label>
               </div>
@@ -40,7 +44,7 @@ export default function Signin() {
                   className="form-control"
                   id="password"
                   name="password"
-                  onChange={(e)=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <label htmlFor="password">Mot de passe</label>
               </div>
@@ -53,12 +57,11 @@ export default function Signin() {
                   </label>
                 </div>
 
-                <a
-                  className="text-muted hover-primary fs-13 mt-2 mt-md-0"
-                  href="#"
-                >
-                  Mot de passe oublié ?
-                </a>
+                <Link href="#">
+                  <a className="text-muted hover-primary fs-13 mt-2 mt-md-0">
+                    Mot de passe oublié ?
+                  </a>
+                </Link>
               </div>
 
               <div className="form-group">
@@ -73,9 +76,9 @@ export default function Signin() {
           </div>
           <p className="text-center text-muted fs-13 mt-20">
             Pas de compte ?
-            <a className="text-primary fw-500" href="#">
-              Créer un compte
-            </a>
+            <Link href="/signup">
+              <a className="text-primary fw-500">Créer un compte</a>
+            </Link>
           </p>
         </div>
       </div>

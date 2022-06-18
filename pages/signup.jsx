@@ -5,13 +5,12 @@ import { useSession } from "next-auth/react";
 export default function () {
     const router = useRouter();
     const { status } = useSession();
-    if (router.pathname="/login" && status=="authenticated" ) {
+    if (router.pathname="/signup" && status=="authenticated" ) {
         router.replace("/");
     }
-    
   return (
     <>
-    {status=="authenticated" && (
+      {status == "authenticated" && (
         <>
           <div className="preloader">
             <div className="spinner-dots">
@@ -23,5 +22,5 @@ export default function () {
         </>
       )}
     </>
-  )
+  );
 }

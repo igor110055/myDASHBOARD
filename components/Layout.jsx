@@ -3,10 +3,15 @@ import Container from "./Header/Container";
 import Sidebar from "./Header/Sidebar";
 import Topbar from "./Header/Topbar";
 import Signin from "./Signin/Signin";
+import Signup from "./Signup/Signup";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
   const { status } = useSession();
+  const router = useRouter();
+  const url = router.pathname;
+
   return (
     <>
       <Head>
@@ -16,10 +21,6 @@ export default function Layout({ children }) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta name="description" content="dashboard " />
-        <link
-          href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i"
-          rel="stylesheet"
-        />
         <title>Dashboard</title>
       </Head>
       {/* <!-- Preloader --> */}
@@ -34,7 +35,6 @@ export default function Layout({ children }) {
           </div>
         </>
       )}
-
       {status == "authenticated" && (
         <>
           <Sidebar />
@@ -48,7 +48,18 @@ export default function Layout({ children }) {
           {/* <!--/.main-content --> */}
         </>
       )}
-      {status == "unauthenticated" && <Signin />}
+      {status == "unauthenticated" && (
+        <>
+          {(() => {
+            switch (url) {
+              case "/signup":
+                return <Signup />;
+              default:
+                return <Signin />;
+            }
+          })()}
+        </>
+      )}
 
       {/* <!-- Scripts --> */}
       <script src="/assets/js/core.min.js"></script>
