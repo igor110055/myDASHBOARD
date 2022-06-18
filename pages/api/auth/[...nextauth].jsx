@@ -10,10 +10,8 @@ export default NextAuth({
         console.log("credentials ==>", credentials);
         const email = credentials.email;
         const password = credentials.password;
-        const result = await axios.post("/api/service/login", {
-          email,
-          password,
-        });
+        const body = {email,password}
+        const result = await axios.post("/api/service/login",body);
         // try {
         //     if (!result.data.isValide) {
         //         return null;
