@@ -1,6 +1,13 @@
 import Container from "../Header/Container";
+import { signIn } from "next-auth/react";
 
 export default function Signin() {
+  const submit = (e) => {
+    e.preventDefault();
+    signIn("credentials");
+
+  };
+
   return (
     <Container>
       <div className="row min-h-fullscreen center-vh p-20 m-0">
@@ -12,7 +19,7 @@ export default function Signin() {
             <h5 className="text-uppercase">Authentification</h5>
             <br />
 
-            <form className="form-type-material">
+            <form className="form-type-material" onSubmit={(e)=>submit(e)}>
               <div className="form-group">
                 <input
                   type="text"
@@ -59,6 +66,7 @@ export default function Signin() {
               </div>
             </form>
           </div>
+          <p className="text-center text-muted fs-13 mt-20">Pas de compte ? <a class="text-primary fw-500" href="#">Créer un compte</a></p>
         </div>
       </div>
     </Container>
