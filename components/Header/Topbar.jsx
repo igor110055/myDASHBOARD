@@ -15,21 +15,21 @@ export default function Topbar() {
 
       <div className="topbar-right">
         <ul className="topbar-btns">
-          <li class="dropdown">
-            <span class="topbar-btn" data-toggle="dropdown">
-              <img class="avatar" src="/assets/img/avatar/1.jpg" alt="..." />
+          <li className="dropdown">
+            <span className="topbar-btn" data-toggle="dropdown">
+              <img className="avatar" src="/assets/img/avatar/1.jpg" alt="..." />
             </span>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="">
-                <i class="ti-user"></i> Profil
+            <div className="dropdown-menu dropdown-menu-right">
+              <a className="dropdown-item" href="">
+                <i className="ti-user"></i> Profil
               </a>
 
-              <a class="dropdown-item" href="#">
-                <i class="ti-settings"></i> Paramètres
+              <a className="dropdown-item" href="#">
+                <i className="ti-settings"></i> Paramètres
               </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" onClick={(e) => logout(e)}>
-                <i class="ti-power-off"></i> Déconnexion
+              <div className="dropdown-divider"></div>
+              <a className="dropdown-item" href="#" onClick={(e) => logout(e)}>
+                <i className="ti-power-off"></i> Déconnexion
               </a>
             </div>
           </li>
