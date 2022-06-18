@@ -1,11 +1,14 @@
 import Container from "../Header/Container";
 import { signIn } from "next-auth/react";
+import { useState } from "react";
 
 export default function Signin() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   const submit = (e) => {
     e.preventDefault();
-    signIn("credentials");
-
+    signIn("credentials", { email:"administrateur@domaine.com", password:"adm1n1str@t3ur" });
   };
 
   return (
@@ -19,13 +22,14 @@ export default function Signin() {
             <h5 className="text-uppercase">Authentification</h5>
             <br />
 
-            <form className="form-type-material" onSubmit={(e)=>submit(e)}>
+            <form className="form-type-material" onSubmit={(e) => submit(e)}>
               <div className="form-group">
                 <input
                   type="text"
                   className="form-control"
                   id="email"
                   name="email"
+                  onChange={(e)=>setEmail(e.target.value)}
                 />
                 <label htmlFor="email">Email</label>
               </div>
@@ -36,6 +40,7 @@ export default function Signin() {
                   className="form-control"
                   id="password"
                   name="password"
+                  onChange={(e)=>setPassword(e.target.value)}
                 />
                 <label htmlFor="password">Mot de passe</label>
               </div>
@@ -66,7 +71,12 @@ export default function Signin() {
               </div>
             </form>
           </div>
-          <p className="text-center text-muted fs-13 mt-20">Pas de compte ? <a class="text-primary fw-500" href="#">Créer un compte</a></p>
+          <p className="text-center text-muted fs-13 mt-20">
+            Pas de compte ?
+            <a className="text-primary fw-500" href="#">
+              Créer un compte
+            </a>
+          </p>
         </div>
       </div>
     </Container>
