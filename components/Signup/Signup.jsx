@@ -43,9 +43,9 @@ export default function Signup() {
                 <div className="custom-control custom-checkbox">
                   <input type="checkbox" className="custom-control-input" />
                   <label className="custom-control-label">
-                    I agree to all{" "}
+                    Accepter les  {" "}
                     <a className="text-primary" href="#">
-                      terms
+                      termes
                     </a>
                   </label>
                 </div>
@@ -61,7 +61,7 @@ export default function Signup() {
             </form>
           </div>
           <p className="text-center text-muted fs-13 mt-20">
-            Déja un compte ?
+            Déja un compte ? {" "}
             <Link href="/login">
             <a className="text-primary fw-500" >
               S'authentifier

@@ -6,6 +6,7 @@ import Signin from "./Signin/Signin";
 import Signup from "./Signup/Signup";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Recovery from "./Recovery/Recovery";
 
 export default function Layout({ children }) {
   const { status } = useSession();
@@ -54,6 +55,8 @@ export default function Layout({ children }) {
             switch (url) {
               case "/signup":
                 return <Signup />;
+              case "/recovery":
+                return <Recovery/>;
               default:
                 return <Signin />;
             }

@@ -2,17 +2,33 @@ import Container from "../Header/Container";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Signin() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
+  const body = {
+    email,
+    password,
+  };
+  // {
+  //   email: "administrateur@domaine.com",
+  //   password: "adm1n1str@t3ur",
+  // }
   const submit = (e) => {
     e.preventDefault();
-    signIn("credentials", {
-      email: "administrateur@domaine.com",
-      password: "adm1n1str@t3ur",
-    });
+    axios
+      .post("/api/service/login", body)
+      .then((res) => {
+        console.log("data =>", res.data);
+        if (!res.data.isValide) {
+          throw "Error";
+        }
+        signIn("credentials", { isValide: true, data: res.data });
+      })
+      .catch((err) => {
+        app.toast("Email ou Mot de passe Invalide !");
+      });
   };
 
   return (
@@ -57,7 +73,7 @@ export default function Signin() {
                   </label>
                 </div>
 
-                <Link href="#">
+                <Link href="/recovery">
                   <a className="text-muted hover-primary fs-13 mt-2 mt-md-0">
                     Mot de passe oublié ?
                   </a>
@@ -75,7 +91,7 @@ export default function Signin() {
             </form>
           </div>
           <p className="text-center text-muted fs-13 mt-20">
-            Pas de compte ?
+            Pas de compte ? {" "}
             <Link href="/signup">
               <a className="text-primary fw-500">Créer un compte</a>
             </Link>

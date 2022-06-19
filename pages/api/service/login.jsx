@@ -1,5 +1,6 @@
 import axios from "axios";
 
+const url = "http://test.lemeilleurservice.org/api/api/v1/utilisateurs/authentifier"
 
 export default async function (req,res) {
     const { email, password } = req.body;
@@ -24,11 +25,10 @@ export default async function (req,res) {
       const data = result.data;
       if (`${data.code_message}` !== "200") {
         return res.status(400).json({ message: "ERR_OAUTH" });
-        //throw new Error("ERR_OAUTH")
       }
       return res.status(200).json({...data,isValide : true});
     })
     .catch((err) => {
-      return res.status(400).json({ message: err.message + "400" });
+      return res.status(400).json({ message: err.message + " !" });
     });
 }

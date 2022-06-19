@@ -6,24 +6,10 @@ export default NextAuth({
   providers: [
     CredentialsProvider({
       name: "DEAVELY",
-      authorize: async (credentials) => {
+      authorize: (credentials) => {
         console.log("credentials ==>", credentials);
-        const email = credentials.email;
-        const password = credentials.password;
-        const body = {email,password}
-        const result = await axios.post("/api/service/login",body);
-        // try {
-        //     if (!result.data.isValide) {
-        //         return null;
-        //     }
-
-        //     return result.data;
-        // } catch (error) {
-        //     console.log("error ===> ",error)
-        //     return null;
-        // }
-        if (result.data.isValide) {
-          return result.data;
+        if (credentials.isValide) {
+          return {...credentials.data};
         } else {
           return null;
         }
